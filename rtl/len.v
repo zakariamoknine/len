@@ -3,7 +3,7 @@
 
 module len (
 	input  wire       clk,
-    input  wire       resetn,
+	input  wire       resetn,
 
     output wire       trap,
     
