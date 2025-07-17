@@ -8,7 +8,7 @@ module len (
     output wire       trap,
     
     /* VGA signals */
-    output wire       hsync,
+	output wire       hsync,
     output wire       vsync,
     output wire [3:0] c_r,
     output wire [3:0] c_g,

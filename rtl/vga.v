@@ -2,7 +2,7 @@
 
 
 module vga (
-    input  wire        clk,
+	input  wire        clk,
     input  wire        resetn,
      
     output wire        hsync,

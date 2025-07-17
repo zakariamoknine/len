@@ -3,7 +3,7 @@
 
 module ram (
     input  wire        clk,
-    input  wire        resetn,
+	input  wire        resetn,
     
     input  wire        ram_mem_valid,
     input  wire        ram_mem_instr,
