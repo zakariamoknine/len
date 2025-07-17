@@ -1,6 +1,6 @@
 include ../Makefile.conf
 
-FIRMWAREOBJ := ../out/firmware.o
+FIRMWAREOBJ := ../out/start.o ../out/firmware.o
 
 all: ../out/program.mem
 
