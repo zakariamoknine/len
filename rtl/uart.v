@@ -98,7 +98,7 @@ module uart #(
 				endcase
 				uart_mem_ready <= 1;
 			end else begin
-    		    tx_start <= 0;
+				tx_start <= 0;
 			end
 		end
 	end
