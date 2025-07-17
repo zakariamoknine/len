@@ -4,26 +4,26 @@
 module uart #(
 	parameter CLKS_PER_BIT = 5208
 ) (
-    input  wire        clk,
-    input  wire        resetn,
-
+	input  wire        clk,
+	input  wire        resetn,
+	
 	output wire        ser_tx,
 	input  wire        ser_rx,
-    
-    input  wire        uart_mem_valid,
-    input  wire        uart_mem_instr,
-    output reg         uart_mem_ready,
-    input  wire [31:0] uart_mem_addr,
-    input  wire [31:0] uart_mem_wdata,
-    input  wire [ 3:0] uart_mem_wstrb,
-    output reg  [31:0] uart_mem_rdata
+	
+	input  wire        uart_mem_valid,
+	input  wire        uart_mem_instr,
+	output reg         uart_mem_ready,
+	input  wire [31:0] uart_mem_addr,
+	input  wire [31:0] uart_mem_wdata,
+	input  wire [ 3:0] uart_mem_wstrb,
+	output reg  [31:0] uart_mem_rdata
 );
 
 	wire [7:0] rx_data;
 	wire       rx_valid;
 	reg  [7:0] rx_data_latch;
 	reg        rx_valid_latch;
-
+	
 	reg  [7:0] tx_data;
 	reg        tx_start;
 	wire       tx_busy;
@@ -109,12 +109,12 @@ endmodule
 module uart_rx #(
 	parameter CLKS_PER_BIT = 5208
 ) (
-    input  wire       clk,
+	input  wire       clk,
 	input  wire       resetn,
-
-    input  wire       rx,
-    output reg [7:0]  rx_data,
-    output reg        rx_valid
+	
+	input  wire       rx,
+	output reg [7:0]  rx_data,
+	output reg        rx_valid
 );
 
     localparam RX_IDLE    = 2'b00;
@@ -212,14 +212,14 @@ endmodule
 module uart_tx #(
 	parameter CLKS_PER_BIT = 5208
 ) (
-    input  wire       clk,
+	input  wire       clk,
 	input  wire       resetn,
-
-    input  wire [7:0] tx_data,
-    input  wire       tx_start,
-    output reg        tx,
-    output reg        tx_busy,
-    output reg        tx_done
+	
+	input  wire [7:0] tx_data,
+	input  wire       tx_start,
+	output reg        tx,
+	output reg        tx_busy,
+	output reg        tx_done
 );
 
     localparam TX_IDLE  = 2'b00;
