@@ -19,7 +19,7 @@ module len (
 	input  wire       ser_rx
 );
 
-	wire		mem_valid;
+	wire        mem_valid;
 	wire        mem_instr;
 	wire        mem_ready;
 	wire [31:0] mem_addr;
@@ -52,7 +52,7 @@ module len (
 	wire [31:0] uart_mem_rdata;
 	
 	picorv32 #(
-	    .STACKADDR(32'h00007FF0)
+		.STACKADDR(32'h00007FF0)
 	) picorv32_instance (
 		.clk            (clk),
 		.resetn         (resetn),
@@ -140,7 +140,7 @@ module len (
 	) uart_instance (
 		.clk            (clk),
 		.resetn         (resetn),
-		
+	
 		.ser_tx         (ser_tx),
 		.ser_rx         (ser_rx),
 		
