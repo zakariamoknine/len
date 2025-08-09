@@ -1,4 +1,64 @@
+#include "config.h"
+
 .section .text
 .global _entry
 _entry:
-	j     _entry
+	/* setup the stack for each HART */
+	la      sp, __stack_top
+	li      a0, 4096
+	csrr    a1, mhartid
+
+	mul     a0, a0, a1
+
+	sub     sp, sp, a0
+
+	/* set MMP bit to S-mode */
+	csrr    t0, mstatus
+	
+	li      t1, ~(3 << 11)
+	and     t0, t0, t1
+
+	li      t1, (1 << 11)
+	or      t0, t0, t1
+
+	csrw    mstatus, t0
+
+	/* set the function pointer mret will return to */
+	la      t0, kernel_start
+	csrw    mepc, t0
+	
+	/* disable paging */
+	csrw    satp, x0
+
+	/* delegate interrupts and exceptions to S-mode */
+	li      t0, 0xFFFF
+	csrw    medeleg, t0
+	csrw    mideleg, t0
+	
+	csrr    t0, sie
+	li      t1, (1 << 9) | (1 << 5)
+	or      t0, t0, t1
+	csrw    sie, t0
+
+	/* let S-mode access all physical memory, disable PMP for S-mode */
+	li      t0, 0x3FFFFFFF
+	csrw    pmpaddr0, t0
+
+	li      t0, 0xF
+	csrw    pmpcfg0, t0
+
+	/* TODO: initialize timer for each HART */
+	
+	/* store mhartid on the tp register for faster access */	
+	csrr    t0, mhartid
+	mv      tp, t0
+
+	/* jump to kernel_main */
+	mret
+
+
+.section .bss
+.p2align 4
+.space 4096 * NHART
+.global __stack_top
+__stack_top:

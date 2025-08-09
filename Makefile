@@ -15,7 +15,7 @@ $(KERNEL): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 
 $(ELF): $(OBJ)
-	$(LD) -T kernel/kernel.ld -o $@ $^
+	$(LD) -T kernel.ld -o $@ $^
 
 $(OUTDIR)/%.o: %.c
 	@mkdir -p $(dir $@)
@@ -26,7 +26,7 @@ $(OUTDIR)/%.o: %.S
 	$(CC) $(CCFLAGS) -o $@ $<
 
 qemu:
-	$(QEMU) -machine virt -bios none -kernel $(KERNEL) -m 128M -smp $(NCPU) -nographic
+	$(QEMU) -machine virt -bios none -kernel $(KERNEL) -smp $(NHART) -m 128M -nographic
 
 clean:
 	rm -rf $(OUTDIR)
