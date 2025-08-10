@@ -4,8 +4,7 @@ OUTDIR := out
 ELF    := $(OUTDIR)/kernel.elf
 KERNEL := $(OUTDIR)/kernel.img
 
-SRC := $(shell find kernel -type f \( -name "*.c" -o -name "*.S" \))
-
+SRC := $(shell find kernel drivers -type f \( -name "*.c" -o -name "*.S" \))
 OBJ := $(patsubst %.c, $(OUTDIR)/%.o, $(SRC:.S=.c))
 OBJ := $(patsubst %.c.o, %.o, $(OBJ))
 
@@ -26,7 +25,7 @@ $(OUTDIR)/%.o: %.S
 	$(CC) $(CCFLAGS) -o $@ $<
 
 qemu:
-	$(QEMU) -machine virt -bios none -kernel $(KERNEL) -smp $(NHART) -m 128M -nographic
+	$(QEMU) -machine virt -bios none -kernel $(KERNEL) -smp $(HART_NUM) -m 128M -nographic
 
 clean:
 	rm -rf $(OUTDIR)
