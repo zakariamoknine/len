@@ -1,4 +1,5 @@
 #include "config.h"
+#include "riscv.h"
 
 .section .text
 .global _entry
@@ -15,10 +16,10 @@ _entry:
 	/* set MMP bit to S-mode */
 	csrr    t0, mstatus
 	
-	li      t1, ~(3 << 11)
+	li      t1, ~(MSTATUS_MPP_MASK)
 	and     t0, t0, t1
 
-	li      t1, (1 << 11)
+	li      t1, MSTATUS_MPP_S
 	or      t0, t0, t1
 
 	csrw    mstatus, t0
@@ -36,7 +37,7 @@ _entry:
 	csrw    mideleg, t0
 	
 	csrr    t0, sie
-	li      t1, (1 << 9) | (1 << 5)
+	li      t1, SIE_SEIE | SIE_STIE | SIE_SSIE
 	or      t0, t0, t1
 	csrw    sie, t0
 
