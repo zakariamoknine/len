@@ -6,7 +6,7 @@
 _entry:
 	/* setup the stack for each HART */
 	la      sp, __stack_top
-	li      a0, STACK_SIZE
+	li      a0, KERNEL_STACK_SIZE
 	csrr    a1, mhartid
 
 	mul     a0, a0, a1
@@ -60,6 +60,6 @@ _entry:
 
 .section .bss
 .p2align 4
-.space STACK_SIZE * HART_MAX_NUM
+.space KERNEL_STACK_SIZE * HART_MAX_NUM
 .global __stack_top
 __stack_top:

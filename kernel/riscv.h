@@ -1,9 +1,9 @@
 /* 
  * MMP: Previous Privilege Mode
  *
- * M:   Machine mode
- * S:   Supervisor mode
- * U:   User mode
+ * M: Machine mode
+ * S: Supervisor mode
+ * U: User mode
  */
 #define MSTATUS_MPP_MASK (3L << 11)
 #define MSTATUS_MPP_M    (3L << 11)
