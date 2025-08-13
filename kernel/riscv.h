@@ -1,3 +1,11 @@
+#if __riscv_xlen == 32
+	#define ARCHITECTURE_32BIT
+#elif __riscv_xlen == 64
+	#define ARCHITECTURE_64BIT
+#else
+	#error "undefined __riscv_xlen"
+#endif
+
 /* 
  * MMP: Previous Privilege Mode
  *
@@ -34,3 +42,12 @@
 #define MIE_MTIE    (1L << 7)
 #define MIE_MSIE    (1L << 3)
 #define MSTATUS_MIE (1L << 3)
+
+
+/* PMP: Physical Memory Protection */
+#ifdef ARCHITECTURE_64BIT
+	#define PMP_ADDR0 0x3FFFFFFFFFFFFFULL
+#else
+	#define PMP_ADDR0 0x3FFFFFFF
+#endif
+#define PMP_CFG0      0xF
