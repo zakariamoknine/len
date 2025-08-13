@@ -1,12 +1,11 @@
 include Makefile.conf
 
 OUTDIR := out
-ELF    := $(OUTDIR)/kernel.elf
+ELF := $(OUTDIR)/kernel.elf
 KERNEL := $(OUTDIR)/kernel.img
 
 SRC := $(shell find kernel drivers -type f \( -name "*.c" -o -name "*.S" \))
-OBJ := $(patsubst %.c, $(OUTDIR)/%.o, $(SRC:.S=.c))
-OBJ := $(patsubst %.c.o, %.o, $(OBJ))
+OBJ := $(patsubst %.c,$(OUTDIR)/%.o,$(filter %.c,$(SRC))) $(patsubst %.S,$(OUTDIR)/%.o,$(filter %.S,$(SRC)))
 
 all: $(KERNEL)
 
