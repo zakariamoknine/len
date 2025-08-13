@@ -1,4 +1,4 @@
-#include "internal.h"
+#include <len/internal.h>
 
 void kernel_start(void)
 {

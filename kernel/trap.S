@@ -1,5 +1,4 @@
-#include "config.h"
-#include "riscv.h"
+#include <len/riscv.h>
 
 .section .text
 
