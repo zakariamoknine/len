@@ -2,6 +2,7 @@
 #include "riscv.h"
 
 .section .text
+
 .global _entry
 _entry:
 	/* setup the stack for each HART */
@@ -42,23 +43,29 @@ _entry:
 	csrw    sie, t0
 
 	/* let S-mode access all physical memory, disable PMP for S-mode */
-	li      t0, 0x3FFFFFFF
+	li      t0, PMP_ADDR0
 	csrw    pmpaddr0, t0
 
-	li      t0, 0xF
+	li      t0, PMP_CFG0
 	csrw    pmpcfg0, t0
 
-	/* TODO: initialize timer for each HART */
+	/* initialize timer for each HART */
 	
-	/* store mhartid on the tp register for faster access */	
+	/* store mhartid on the tp register for easier access */	
 	csrr    t0, mhartid
 	mv      tp, t0
 
-	/* jump to kernel_main */
+	/* jump to kernel_start! */
 	mret
 
 
 .section .bss
+
+.p2align 3
+.global timer_scratch
+timer_scratch:
+.space HART_MAX_NUM * 5 * 8
+
 .p2align 4
 .space KERNEL_STACK_SIZE * HART_MAX_NUM
 .global __stack_top
