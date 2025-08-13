@@ -1,3 +1,6 @@
+#ifndef _RISCV_H_
+#define _RISCV_H_
+
 #if __riscv_xlen == 32
 	#define ARCHITECTURE_32BIT
 #elif __riscv_xlen == 64
@@ -51,3 +54,5 @@
 	#define PMP_ADDR0 0x3FFFFFFF
 #endif
 #define PMP_CFG0      0xF
+
+#endif // _RISCV_H_
