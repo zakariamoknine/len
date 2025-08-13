@@ -50,7 +50,7 @@ _entry:
 	csrw    pmpcfg0, t0
 
 	/* initialize timer for each HART, in timer.c */
-	call init_timer
+	call    init_timer
 
 	/* store mhartid on the tp register for easier access */	
 	csrr    t0, mhartid
