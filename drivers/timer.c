@@ -3,7 +3,7 @@
 
 uint64 timer_scratch[HART_MAX_NUM][5];
 
-/* implemented in trap.S */
+/* implemented in kernel/trap.S */
 extern void timer_handler(void);
 
 static uint64 timer_read_mtime(void)
@@ -38,7 +38,7 @@ void init_timer(void)
 	uint64 hartid;
 	__asm__ __volatile__("csrr %0, mhartid" : "=r" (hartid));
 
-	uint32 interval = 1000000;
+	uint64 interval = 1000000;
 	
 	uint64 next_mtime = timer_read_mtime() + interval;
 	timer_write_mtimecmp(hartid, next_mtime);
