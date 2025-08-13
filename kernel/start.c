@@ -1,6 +1,6 @@
 #include "internal.h"
-#include "config.h"
 
 void kernel_start(void)
 {
+	while(1);
 }
