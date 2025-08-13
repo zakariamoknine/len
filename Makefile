@@ -5,7 +5,7 @@ ELF := $(OUTDIR)/kernel.elf
 KERNEL := $(OUTDIR)/kernel.img
 
 SRC := $(shell find kernel drivers -type f \( -name "*.c" -o -name "*.S" \))
-OBJ := $(patsubst %.c,$(OUTDIR)/%.o,$(filter %.c,$(SRC))) $(patsubst %.S,$(OUTDIR)/%.o,$(filter %.S,$(SRC)))
+OBJ := $(patsubst %.c, $(OUTDIR)/%.o, $(filter %.c,$(SRC))) $(patsubst %.S, $(OUTDIR)/%.o, $(filter %.S,$(SRC)))
 
 all: $(KERNEL)
 

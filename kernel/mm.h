@@ -7,7 +7,10 @@
  * will be used
  */
 
-#define MMCLINT 0x20000000
-#define MMCLINT_MTIMECMP(hartid) (MMCLINT + 0x4000 + 8 * (hartid))	
+#include "riscv.h"
 
-#endif // _MM_H_
+#define MMCLINT                  0x02000000
+#define MMCLINT_MTIMECMP(hartid) (MMCLINT + 0x4000 + 8 * (hartid))	
+#define MMCLINT_MTIME            (MMCLINT + 0xBFF8)
+
+#endif /* _MM_H_ */

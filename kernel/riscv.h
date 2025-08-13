@@ -55,4 +55,4 @@
 #endif
 #define PMP_CFG0      0xF
 
-#endif // _RISCV_H_
+#endif /* _RISCV_H_ */

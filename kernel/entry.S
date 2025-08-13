@@ -49,8 +49,9 @@ _entry:
 	li      t0, PMP_CFG0
 	csrw    pmpcfg0, t0
 
-	/* initialize timer for each HART */
-	
+	/* initialize timer for each HART, in timer.c */
+	call init_timer
+
 	/* store mhartid on the tp register for easier access */	
 	csrr    t0, mhartid
 	mv      tp, t0
@@ -60,11 +61,6 @@ _entry:
 
 
 .section .bss
-
-.p2align 3
-.global timer_scratch
-timer_scratch:
-.space HART_MAX_NUM * 5 * 8
 
 .p2align 4
 .space KERNEL_STACK_SIZE * HART_MAX_NUM
