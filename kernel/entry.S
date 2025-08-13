@@ -59,7 +59,6 @@ _entry:
 	/* jump to kernel_start! */
 	mret
 
-
 .section .bss
 
 .p2align 4
