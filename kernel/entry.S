@@ -14,7 +14,7 @@ _entry:
 
 	sub     sp, sp, a0
 
-	/* set MMP bit to S-mode */
+	/* set MPP bit to S-mode */
 	csrr    t0, mstatus
 	
 	li      t1, ~(MSTATUS_MPP_MASK)
@@ -49,7 +49,7 @@ _entry:
 	li      t0, PMP_CFG0
 	csrw    pmpcfg0, t0
 
-	/* initialize timer for each HART, in timer.c */
+	/* initialize timer for each HART, in driver/timer.c */
 	call    init_timer
 
 	/* store mhartid on the tp register for easier access */	

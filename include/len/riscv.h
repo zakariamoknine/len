@@ -10,7 +10,7 @@
 #endif
 
 /* 
- * MMP: Previous Privilege Mode
+ * MPP: Machine Previous Privilege
  *
  * M: Machine mode
  * S: Supervisor mode
