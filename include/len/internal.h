@@ -66,4 +66,16 @@ static inline void w_mie(uint64 val)
 	asm volatile("csrw mie, %0" : : "r" (val));
 }
 
+static inline void w_stvec(uint64 val)
+{
+	asm volatile("csrw stvec, %0" : : "r" (val));
+}
+
+static inline uint64 r_stvec()
+{
+	uint64 stvec;
+	asm volatile("csrr %0, stvec" : "=r" (stvec) );
+	return stvec;
+}
+
 #endif /* _INTERNAL_H_ */

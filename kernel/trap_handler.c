@@ -15,7 +15,7 @@ static inline void uart_putc(char c)
     *thr = c;
 }
 
-void uart_puts(const char *s) 
+void uart_puts(const char* s) 
 {
     while (*s) {
         if (*s == '\n')
