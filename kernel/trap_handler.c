@@ -5,7 +5,8 @@
 #define UART_LSR    0x05
 #define LSR_TX_IDLE 0x20
 
-static inline void uart_putc(char c) {
+static inline void uart_putc(char c) 
+{
     volatile unsigned char *thr = (unsigned char *)(UART0_BASE + UART_THR);
     volatile unsigned char *lsr = (unsigned char *)(UART0_BASE + UART_LSR);
 
@@ -14,7 +15,8 @@ static inline void uart_putc(char c) {
     *thr = c;
 }
 
-void uart_puts(const char *s) {
+void uart_puts(const char *s) 
+{
     while (*s) {
         if (*s == '\n')
             uart_putc('\r');

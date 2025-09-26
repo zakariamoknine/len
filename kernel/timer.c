@@ -18,13 +18,15 @@ void timer_init(void)
 	timer->init(hartid());
 }
 
-void timer_tick(uint64 interval) {
+void timer_tick(uint64 interval) 
+{
 	if (timer) {
 		timer->tick(interval);
 	}
 }
 
-uint64 timer_now(void) {
+uint64 timer_now(void) 
+{
 	if (timer) {
 		return timer->now();
 	}

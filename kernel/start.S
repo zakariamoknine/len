@@ -70,7 +70,6 @@ _start:
 	/* jump to kernel_main */
 	mret
 
-
 .section .bss
 
 .p2align 4

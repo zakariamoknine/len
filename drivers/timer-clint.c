@@ -3,7 +3,8 @@
 
 uint64 clint_timer_scratch[HART_MAX_NUM][5];
 
-void clint_timer_init(uint64 hid) {
+void clint_timer_init(uint64 hid) 
+{
 	*(uint64*)MM_CLINT_MTIMECMP(hid) = *(uint64*)MM_CLINT_MTIME + TIMER_INTERVAL;
 	uint64* scratch = &clint_timer_scratch[hid][0];
 	scratch[3] = MM_CLINT_MTIMECMP(hid);
@@ -11,17 +12,19 @@ void clint_timer_init(uint64 hid) {
 	w_mscratch((uint64)scratch);
 }
 
-void clint_timer_tick(uint64 interval) {
+void clint_timer_tick(uint64 interval) 
+{
 }
 
-uint64 clint_timer_now(void) {
+uint64 clint_timer_now(void) 
+{
 	return 0;
 }
 
 struct timer_operations clint_timer_operations = {
-    .init  = clint_timer_init,
+    .init = clint_timer_init,
     .tick = clint_timer_tick,
-    .now   = clint_timer_now,
+    .now = clint_timer_now,
 };
 
 struct timer_operations* default_timer = &clint_timer_operations;
