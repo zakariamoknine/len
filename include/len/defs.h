@@ -49,4 +49,6 @@ typedef uint16_t                    be16;
 typedef uint32_t                    be32;
 typedef uint64_t                    be64;
 
+typedef uintptr_t                   phys_addr_t;
+
 #endif /* _LEN_DEFS_H_ */

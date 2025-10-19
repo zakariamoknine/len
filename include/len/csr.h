@@ -111,6 +111,13 @@ static inline void w_tp(uint64_t val)
 	asm volatile("mv tp, %0" : : "r" (val));
 }
 
+static inline uint64_t r_tp(void)
+{
+	uint64_t val;
+	asm volatile("mv %0, tp" : "=r" (val) );
+	return val;
+}
+
 static inline uint64_t r_mhartid()
 {
 	uint64_t val;
@@ -128,18 +135,6 @@ static inline uint64_t r_sstatus()
 static inline void w_sstatus(uint64_t val)
 {
 	asm volatile("csrw sstatus, %0" : : "r" (val));
-}
-
-static inline uint64_t hartid(void)
-{
-	uint64_t val;
-	asm volatile("mv %0, tp" : "=r" (val));
-	return val;
-}
-
-static inline void x_mret(void)
-{
-	asm volatile("mret");
 }
 
 #endif /* _LEN_CSR_H_ */

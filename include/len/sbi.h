@@ -3,9 +3,9 @@
 
 #include <len/defs.h>
 
-#define	SBI_SET_TIMER			    0
-#define	SBI_CONSOLE_PUTCHAR		    1
-#define	SBI_CONSOLE_GETCHAR		    2
+#define	SBI_SET_TIMER	     0
+#define	SBI_CONSOLE_PUTCHAR  1
+#define	SBI_CONSOLE_GETCHAR  2
 
 #define	SBI_CALL0(e, f)			    SBI_CALL5(e, f, \
 						0, 0, 0, 0, 0)

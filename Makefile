@@ -2,7 +2,7 @@ include Makefile.conf
 
 OUTDIR := out
 ELF := $(OUTDIR)/kernel.elf
-KERNEL := $(OUTDIR)/kernel.img
+KERNEL := $(OUTDIR)/image
 
 SRCDIRS := kernel drivers mm fs lib fdt
 
@@ -28,10 +28,10 @@ $(OUTDIR)/%.o: %.S
 -include $(OBJ:.o=.d)
 
 qemu:
-	$(QEMU) -machine virt -bios default -kernel $(ELF) -smp $(HART_NUM) -m 128M -nographic
+	$(QEMU) -M virt -bios default -kernel $(KERNEL) -smp $(HART_NUM) -m 128M -nographic
 
 qemugdb:
-	$(QEMU) -machine virt -bios default -kernel $(ELF) -smp $(HART_NUM) -m 128M -nographic -s -S
+	$(QEMU) -M virt -bios default -kernel $(KERNEL) -smp $(HART_NUM) -m 128M -nographic -s -S
 
 CSCOPEDIR := $(SRCDIRS) include
 
@@ -44,6 +44,6 @@ cscope:
 
 clean:
 	rm -rf $(OUTDIR)
-	rm -rf tags cscope.files cscope.out cscope.in.out cscope.po.out
+	rm -rf tags cscope.*
 
 .PHONY: all qemu qemugdb tags cscope clean

@@ -3,13 +3,13 @@
 
 /* define the target architecture */
 #if __riscv_xlen == 32
-/* notify no 32-bit support at compile-time */
-#error "len doesn't support 32-bit RISC-V processors"
-#define ARCHITECTURE_32BIT
+	/* notify no 32-bit support at compile-time */
+	#error "len doesn't support 32-bit RISC-V processors"
+	#define ARCHITECTURE_32BIT
 #elif __riscv_xlen == 64
-#define ARCHITECTURE_64BIT
+	#define ARCHITECTURE_64BIT
 #else
-#error "undefined __riscv_xlen"
+	#error "undefined __riscv_xlen"
 #endif
 
 /* 
@@ -65,9 +65,9 @@
 
 /* PMP: Physical Memory Protection */
 #ifdef ARCHITECTURE_64BIT
-#define PMP_ADDR0 0x3FFFFFFFFFFFFFULL
+	#define PMP_ADDR0 0x3FFFFFFFFFFFFFULL
 #else
-#define PMP_ADDR0 0x3FFFFFFF
+	#define PMP_ADDR0 0x3FFFFFFF
 #endif
 #define PMP_CFG0      0xF
 

@@ -25,12 +25,16 @@ SECTIONS
 		*(.data .data.*)
 	}
 
+	. = ALIGN(8);
+	PROVIDE(_provided_bss_start = .);
 	.bss : {
 		. = ALIGN(16);
 		*(.sbss .sbss.*)
 		. = ALIGN(16);
 		*(.bss .bss.*)
 	}
+	. = ALIGN(8);
+	PROVIDE(_provided_bss_end = .);
 
 	PROVIDE(_provided_kernel_end = .);
 }

@@ -21,7 +21,7 @@ _entry:
 	/* Set the global pointer, defined in kernel.ld */
 	lla     gp, __global_pointer$
 
-	/* Store the boot processor's hart it */
+	/* Store the boot processor's hart ID */
 	lla     t0, boot_hart_id
 	sd      a0, 0(t0)
 
@@ -37,7 +37,7 @@ boot_kernel_pagetables:
 	jal     kernel_base_phys_addr
 
 	/*
-	 * First, we contruct a 1GB 1:1 identity map where
+	 * First, we contruct a 1GB 1:1 identity map where:
 	 * 
 	 * virtual address = physical address
 	 *
@@ -105,8 +105,8 @@ boot_kernel_pagetables:
 
 	/*
 	 * Enabling virtual memory may cause a page fault,
-	 * we setup a temporary stvec just in case to handle
-	 * the page fault, which simply continues execution
+	 * we setup a temporary stvec just in case a page
+	 * fault occurs, where we simply continues execution
 	 * as if nothing happened.
 	 */
 	lla	t0, temp_stvec
@@ -123,7 +123,7 @@ boot_kernel_pagetables:
 	sfence.vma
 	csrw	satp, s2
 
-	.p2align 2
+	.p2align 4
 temp_stvec:
 	/*
 	 * Set the global pointer again, now with the virtual
@@ -135,12 +135,23 @@ temp_stvec:
 	la      t0, exception_handler
 	csrw    stvec, t0
 
+	/* Clear BSS */
+	la	t0, _provided_bss_start
+	la	t1, _provided_bss_end
+1:
+	sd	x0, 0(t0)
+	addi	t0, t0, 8
+	bltu	t0, t1, 1b
+
 	/* Clear the scratch register */
 	li      t0, 0
 	csrw    sscratch, t0
 
 	/* Initialize the stack */
 	la      sp, boot_stack
+
+	/* Initialize args, a0 and a1 are already initialized */
+	mv      a2, s11
 
 	/* Jump to kernel/start.c */
 	call    kernel_start
@@ -164,9 +175,11 @@ arbitrary_address:
 .section .data
 
 .p2align 3
+.global boot_hard_id
 boot_hart_id:
 	.space 8
 .p2align 3
+.global dtb_entry
 dtb_entry:
 	.space 8
 

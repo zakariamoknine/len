@@ -6,10 +6,8 @@
 
 struct spinlock {
 	int locked;
-	struct hart* hart;
 };
 
-int spinlock_held(struct spinlock* lock);
 void spinlock_acquire(struct spinlock* lock);
 void spinlock_release(struct spinlock* lock);
 
