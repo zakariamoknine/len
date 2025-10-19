@@ -72,32 +72,32 @@ boot_kernel_pagetables:
 	 * the kernel itself lives on a high virtual address space
 	 * VM_KERNEL_BASE.
 	 */
-	lla	s1, boot_pagetable_level1
-	lla	s2, boot_pagetable_level2
-	srli	s2, s2, VM_PAGE_SHIFT
+	lla     s1, boot_pagetable_level1
+	lla     s2, boot_pagetable_level2
+	srli    s2, s2, VM_PAGE_SHIFT
 
-	li	a5, VM_KERNEL_BASE
+	li      a5, VM_KERNEL_BASE
 	srli	a5, a5, VM_LEVEL1_SHIFT
 	andi	a5, a5, VM_LEVELN_ADDR_MASK
-	li	t4, VM_PTE_V
+	li      t4, VM_PTE_V
 	slli	t5, s2, VM_PTE_PPN0_SHIFT
-	or	t6, t4, t5
+	or      t6, t4, t5
 
-	li	a6, VM_PTE_SIZE
+	li      a6, VM_PTE_SIZE
 	mulw	a5, a5, a6
-	add	t0, s1, a5
-	sd	t6, (t0)
+	add     t0, s1, a5
+	sd      t6, (t0)
 
-	lla	s1, boot_pagetable_level2
+	lla     s1, boot_pagetable_level2
 	srli	t4, s11, VM_LEVEL2_SHIFT
-	li	t2, VM_LEVELN_ENTRIES
-	add	t3, t4, t2
-	li	t0, (VM_PTE_KERNEL | VM_PTE_X)
+	li      t2, VM_LEVELN_ENTRIES
+	add     t3, t4, t2
+	li      t0, (VM_PTE_KERNEL | VM_PTE_X)
 
 1:
 	slli	t2, t4, VM_PTE_PPN1_SHIFT
-	or	t5, t0, t2
-	sd	t5, (s1)
+	or      t5, t0, t2
+	sd      t5, (s1)
 	addi	s1, s1, VM_PTE_SIZE
 
 	addi	t4, t4, 1
@@ -109,17 +109,17 @@ boot_kernel_pagetables:
 	 * fault occurs, where we simply continues execution
 	 * as if nothing happened.
 	 */
-	lla	t0, temp_stvec
-	sub	t0, t0, s11
-	li	t1, VM_KERNEL_BASE
-	add	t0, t0, t1
+	lla     t0, temp_stvec
+	sub     t0, t0, s11
+	li      t1, VM_KERNEL_BASE
+	add     t0, t0, t1
 	csrw	stvec, t0
 
 	/* Enable paging */
-	lla	s2, boot_pagetable_level1
+	lla     s2, boot_pagetable_level1
 	srli	s2, s2, VM_PAGE_SHIFT
-	li	t0, VM_SATP_MODE_SV39
-	or	s2, s2, t0
+	li      t0, VM_SATP_MODE_SV39
+	or      s2, s2, t0
 	sfence.vma
 	csrw	satp, s2
 
@@ -136,10 +136,10 @@ temp_stvec:
 	csrw    stvec, t0
 
 	/* Clear BSS */
-	la	t0, _provided_bss_start
-	la	t1, _provided_bss_end
+	la      t0, _provided_bss_start
+	la      t1, _provided_bss_end
 1:
-	sd	x0, 0(t0)
+	sd      x0, 0(t0)
 	addi	t0, t0, 8
 	bltu	t0, t1, 1b
 
