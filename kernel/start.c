@@ -12,6 +12,8 @@ void kernel_start(uint64_t hid, phys_addr_t dtb_entry,
 	boot_hart = &harts[0];
 	hart_init(boot_hart, 0, hid);
 
+	sbi_init();
+
 	early_parse_dtb_for_memory();
 
 	mm_init();
