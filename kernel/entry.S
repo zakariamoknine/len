@@ -1,4 +1,5 @@
 #include <len/config.h>
+#include <len/mm_param.h>
 
 .section .text.boot
 
@@ -39,7 +40,7 @@ boot_kernel_pagetables:
 	/*
 	 * First, we contruct a 1GB 1:1 identity map where:
 	 * 
-	 * virtual address = physical address
+	 *	virtual address = physical address
 	 *
 	 * This is done because the instant we turn sapt.MODE
 	 * to Sv39 the processor starts interpreting the PC

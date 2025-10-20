@@ -13,9 +13,7 @@ static struct spinlock printk_spinlock = { 0 };
 
 static void pchar(char c)
 {
-	if (sbi_has_putchar) {
-		sbi_console_putchar(c);
-	}
+	sbi_console_putchar(c);
 }
 
 static void pstring(const char* str)
@@ -123,7 +121,7 @@ void log(int level, const char* str, ...)
 {
 	switch (level) {
 	case LOG_INFO:
-		printk("[ INFO ]: ");
+		printk("[ OK ]: ");
 		break;
 	case LOG_WARNING:
 		printk("[ WARNING ]: ");
@@ -132,7 +130,7 @@ void log(int level, const char* str, ...)
 		printk("[ ERROR ]: ");
 		break;
 	default:
-		printk("[ LOG ]:");
+		printk("[ LEN ]:");
 		break;
 	}
 

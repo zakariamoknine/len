@@ -79,15 +79,17 @@ struct sbi_ret {
 };
 
 void sbi_init(void);
+int sbi_is_ext_supported(uint64_t id);
 
-extern int legacy_sbi;
-
-extern int sbi_has_ext_time;
-extern int sbi_has_putchar;
+int sbi_hsm_hart_start(uint64_t hart, uint64_t start_addr,
+		       uint64_t priv);
+void sbi_hsm_hart_stop(void);
+int sbi_hsm_hart_status(uint64_t hart);
 
 static inline struct sbi_ret sbi_call(uint64_t extid, uint64_t fid,
-		uint64_t arg0, uint64_t arg1, uint64_t arg2,
-	       	uint64_t arg3, uint64_t arg4)
+				      uint64_t arg0, uint64_t arg1, 
+				      uint64_t arg2, uint64_t arg3,
+				      uint64_t arg4)
 {
 	struct sbi_ret ret;
 
@@ -109,7 +111,9 @@ static inline struct sbi_ret sbi_call(uint64_t extid, uint64_t fid,
 
 static inline void sbi_console_putchar(int c)
 {
-	(void)SBI_CALL1(SBI_CONSOLE_PUTCHAR, 0, c);
+	if (sbi_is_ext_supported(SBI_CONSOLE_PUTCHAR)) {
+		(void)SBI_CALL1(SBI_CONSOLE_PUTCHAR, 0, c);
+	}
 }
 
 static inline long sbi_probe_extension(long id)

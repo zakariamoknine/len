@@ -23,11 +23,6 @@ void interrupts_enable(void)
 {
 	struct hart* this_hart = hartid();
 
-	if (interrupts_state() 
-			|| (this_hart->interrupts_disable_nesting < 1)) {
-		panic("interrupt_enable");
-	}
-
 	this_hart->interrupts_disable_nesting--;
 
 	if ((this_hart->interrupts_disable_nesting == 0) 

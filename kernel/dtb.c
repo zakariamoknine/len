@@ -81,7 +81,6 @@ void early_parse_dtb_for_memory(void)
 
 	int memory_found = 0;
 	int32_t node = 0;
-	int32_t nodeee = 0;
 
 	fdt_for_each_subnode(node, dtb, 0) {
 		const char* type = fdt_getprop(dtb, node,
