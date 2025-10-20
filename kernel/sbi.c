@@ -92,6 +92,7 @@ void sbi_init(void)
 			       "supported");
 	}
 	if(sbi_probe_extension(SBI_SHUTDOWN) != 0) {
+		sbi_has_shutdown = true;
 		log(LOG_INFO, "legacy reset/shutdown extension "
 			       "supported");
 	}
