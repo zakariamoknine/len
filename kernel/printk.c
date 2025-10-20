@@ -13,7 +13,9 @@ static struct spinlock printk_spinlock = { 0 };
 
 static void pchar(char c)
 {
-	sbi_console_putchar(c);
+	if (sbi_has_putchar) {
+		sbi_console_putchar(c);
+	}
 }
 
 static void pstring(const char* str)

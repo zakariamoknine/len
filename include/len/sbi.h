@@ -3,19 +3,15 @@
 
 #include <len/defs.h>
 
-#define SBI_SET_TIMER              0
-#define SBI_CONSOLE_PUTCHAR        1
-#define SBI_CONSOLE_GETCHAR        2
-
 /* SBI Base Extension */
-#define SBI_EXT_ID_BASE            0x10
-#define SBI_BASE_GET_SPEC_VERSION  0
-#define SBI_BASE_GET_IMPL_ID       1
-#define SBI_BASE_GET_IMPL_VERSION  2
-#define SBI_BASE_PROBE_EXTENSION   3
-#define SBI_BASE_GET_MVENDORID     4
-#define SBI_BASE_GET_MARCHID       5
-#define SBI_BASE_GET_MIMPID        6
+#define SBI_EXT_ID_BASE                  0x10
+#define SBI_BASE_GET_SPEC_VERSION        0
+#define SBI_BASE_GET_IMPL_ID             1
+#define SBI_BASE_GET_IMPL_VERSION        2
+#define SBI_BASE_PROBE_EXTENSION         3
+#define SBI_BASE_GET_MVENDORID           4
+#define SBI_BASE_GET_MARCHID             5
+#define SBI_BASE_GET_MIMPID              6
 
 /* Timer (TIME) Extension */
 #define SBI_EXT_ID_TIME                  0x54494D45
@@ -36,34 +32,34 @@
 #define SBI_RFNC_REMOTE_HFENCE_VVMA      6
 
 /* Hart State Management (HSM) Extension */
-#define SBI_EXT_ID_HSM		      0x48534D
-#define SBI_HSM_HART_START	      0
-#define SBI_HSM_HART_STOP	      1
-#define SBI_HSM_HART_STATUS	      2
-#define SBI_HSM_STATUS_STARTED	      0
-#define SBI_HSM_STATUS_STOPPED	      1
-#define SBI_HSM_STATUS_START_PENDING  2
-#define SBI_HSM_STATUS_STOP_PENDING   3
+#define SBI_EXT_ID_HSM		         0x48534D
+#define SBI_HSM_HART_START	         0
+#define SBI_HSM_HART_STOP	         1
+#define SBI_HSM_HART_STATUS	         2
+#define SBI_HSM_STATUS_STARTED	         0
+#define SBI_HSM_STATUS_STOPPED	         1
+#define SBI_HSM_STATUS_START_PENDING     2
+#define SBI_HSM_STATUS_STOP_PENDING      3
 
 /* System Reset (SRST) Extension */
-#define SBI_EXT_ID_SRST			0x53525354
-#define SBI_SRST_SYSTEM_RESET		0
-#define SBI_SRST_TYPE_SHUTDOWN		0
-#define SBI_SRST_TYPE_COLD_REBOOT	1
-#define SBI_SRST_TYPE_WARM_REBOOT	2
-#define SBI_SRST_REASON_NONE		0
-#define SBI_SRST_REASON_SYSTEM_FAILURE	1
+#define SBI_EXT_ID_SRST			 0x53525354
+#define SBI_SRST_SYSTEM_RESET		 0
+#define SBI_SRST_TYPE_SHUTDOWN		 0
+#define SBI_SRST_TYPE_COLD_REBOOT	 1
+#define SBI_SRST_TYPE_WARM_REBOOT	 2
+#define SBI_SRST_REASON_NONE		 0
+#define SBI_SRST_REASON_SYSTEM_FAILURE	 1
 
 /* Legacy Extensions */
-#define SBI_SET_TIMER		    0
-#define SBI_CONSOLE_PUTCHAR	    1
-#define SBI_CONSOLE_GETCHAR	    2
-#define SBI_CLEAR_IPI		    3
-#define SBI_SEND_IPI		    4
-#define SBI_REMOTE_FENCE_I	    5
-#define SBI_REMOTE_SFENCE_VMA	    6
-#define SBI_REMOTE_SFENCE_VMA_ASID  7
-#define SBI_SHUTDOWN		    8
+#define SBI_SET_TIMER		         0
+#define SBI_CONSOLE_PUTCHAR	         1
+#define SBI_CONSOLE_GETCHAR	         2
+#define SBI_CLEAR_IPI		         3
+#define SBI_SEND_IPI		         4
+#define SBI_REMOTE_FENCE_I	         5
+#define SBI_REMOTE_SFENCE_VMA	         6
+#define SBI_REMOTE_SFENCE_VMA_ASID       7
+#define SBI_SHUTDOWN		         8
 
 #define SBI_CALL0(e, f)			    SBI_CALL5(e, f, 0,  \
 						0, 0, 0, 0)
@@ -83,6 +79,11 @@ struct sbi_ret {
 };
 
 void sbi_init(void);
+
+extern int legacy_sbi;
+
+extern int sbi_has_ext_time;
+extern int sbi_has_putchar;
 
 static inline struct sbi_ret sbi_call(uint64_t extid, uint64_t fid,
 		uint64_t arg0, uint64_t arg1, uint64_t arg2,
@@ -115,6 +116,12 @@ static inline long sbi_probe_extension(long id)
 {
 	return (SBI_CALL1(SBI_EXT_ID_BASE, SBI_BASE_PROBE_EXTENSION,
 			       	id).value);
+}
+
+static inline struct sbi_ret sbi_get_spec_version(void)
+{
+	return (SBI_CALL0(SBI_EXT_ID_BASE,
+			       	SBI_BASE_GET_SPEC_VERSION));
 }
 
 #endif /* _LEN_SBI_H_ */
