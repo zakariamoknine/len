@@ -58,7 +58,7 @@ void sbi_init(void)
 	 * SBI here, we still rely on those if modern ones aren't
 	 * available.
 	 *
-	 * Also putchar is not defined in modern SBI ut it's very
+	 * Also putchar is not defined in modern SBI, but it's very
 	 * nice to have for early printk()
 	 */
 	if(sbi_probe_extension(SBI_CONSOLE_PUTCHAR) != 0) {
@@ -134,10 +134,10 @@ void sbi_init(void)
 
 int sbi_is_ext_supported(uint64_t id)
 {
-	switch (id)
-	{
-		case SBI_CONSOLE_PUTCHAR:
-			return sbi_has_putchar;
-			break;
+	switch (id) {
+	case SBI_CONSOLE_PUTCHAR:
+		return sbi_has_putchar;
+	case SBI_CONSOLE_GETCHAR:
+		return sbi_has_getchar;
 	}
 }

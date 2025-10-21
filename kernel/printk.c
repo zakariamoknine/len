@@ -52,7 +52,7 @@ static void pnumber(uint64_t num, uint8_t base, uint8_t sign)
 
 static void vprintk(const char* str, va_list ap)
 {
-	// spinlock_acquire(&printk_spinlock);
+	spinlock_acquire(&printk_spinlock);
 
 	for (const char* c = str; *c; c++) {
 		if (*c != '%') {
@@ -106,7 +106,7 @@ static void vprintk(const char* str, va_list ap)
 		}
 	}
 
-	// spinlock_release(&printk_spinlock);
+	spinlock_release(&printk_spinlock);
 }
 
 void printk(const char* str, ...)
