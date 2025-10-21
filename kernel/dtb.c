@@ -25,9 +25,8 @@ static uint64_t dt_next_cell(int s, const be32** cellp)
 	return read_cells(p, s);
 }
 
-static int dt_find_root_cells(void)
+static int dt_find_root_cells(const void* dtb)
 {
-	const void* dtb = (const void*)dtb_entry;
 	const be32* prop;
 
 	int node = fdt_path_offset(dtb, "/");
@@ -50,23 +49,18 @@ static int dt_find_root_cells(void)
 }
 
 /*
- * early_parse_dtb_for_memory is used right after entering
- * supervisor mode to find physical addresses of available
- * memory regions on the system.
+ * dtb_find_memory is used early on to find memory regions available
+ * on the system.
  *
  * the memory regions are then passed to the memory subsystem 
  * to initalize it's state and get allocators to work properly
  *
- * after mm_init() is issued and allocators are initialized,
- * now we can parse the whole DTB using proper data structures
- * and extract all the resources we need: devices, interrupts..
- *
  * NOTE: we do not parse for reserved memory regions, that's
  * something we might support later, for now every region found
  * in a memory node is excpected to be fully usable, which
- * is indeed a naive assumption
+ * is of course a naive assumption
  */
-void early_parse_dtb_for_memory(void)
+void dtb_find_memory(uintptr_t dtb_entry)
 {
 	const void* dtb = (const void*)dtb_entry;
 
@@ -74,9 +68,9 @@ void early_parse_dtb_for_memory(void)
 		panic("DTB: invalid header");
 	}
 
-	if (!dt_find_root_cells()) {
+	if (!dt_find_root_cells(dtb)) {
 		log(LOG_WARNING, "DTB: root address/size cells not "
-			       	"found, default values are used");
+			       	 "found, default values are used");
 	}
 
 	int memory_found = 0;
@@ -103,6 +97,7 @@ void early_parse_dtb_for_memory(void)
 		const be32* reg;
 		const be32* endp;
 		int32_t len;
+		struct mm_region mmrgn;
 
 		reg = fdt_getprop(dtb, node, "reg", &len);
 
@@ -116,25 +111,32 @@ void early_parse_dtb_for_memory(void)
 				       	dt_root_size_cells)) {
 			uint64_t base, size, index;
 
-			base = dt_next_cell(dt_root_addr_cells, &reg);
-			size = dt_next_cell(dt_root_size_cells, &reg);
-			
+			base = dt_next_cell(dt_root_addr_cells, 
+					    &reg);
+			size = dt_next_cell(dt_root_size_cells, 
+					    &reg);
+
 			if (size == 0) {
 				continue;
 			}
 
 			memory_found = 1;
 
-			// map region
+			log(LOG_INFO, "mm_region found: base=%p, "
+				      "size=%x", base, size);
+
+			mmrgn.base = base;
+			mmrgn.size = size;
+			mm_insert_region(mmrgn);
 		}
 	}
 
 	if (!memory_found) {
-		panic("DTB: memory not found");
+		panic("DTB: No memory region found");
 	}
 }
 
-void parse_dtb(void)
+void dtb_parse(uintptr_t dtb_entry)
 {
 	/* ... parsing */
 }

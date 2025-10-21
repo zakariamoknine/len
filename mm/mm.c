@@ -1,6 +1,10 @@
 #include <len/internal.h>
 #include <len/mm.h>
 
-void mm_init(void)
+void mm_insert_region(struct mm_region region)
+{
+}
+
+void mm_exclude_region(struct mm_region region)
 {
 }

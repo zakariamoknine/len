@@ -33,7 +33,7 @@ _entry:
 boot_kernel_pagetables:
 	/*
 	 * After this routine is called, the physical address
-	 * of the base of the kernel is on the s11 register
+	 * of the base of the kernel is in the s11 register
 	 */
 	jal     kernel_base_phys_addr
 

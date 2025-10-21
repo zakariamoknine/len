@@ -3,6 +3,13 @@
 
 #include <len/internal.h>
 
-void mm_init(void);
+struct mm_region {
+	phys_addr_t base;
+	uint64_t size;
+};
+
+void mm_insert_region(struct mm_region region);
+
+void mm_exclude_region(struct mm_region region);
 
 #endif /* _LEN_MM_H_ */

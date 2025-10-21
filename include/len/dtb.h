@@ -9,11 +9,8 @@ struct dt_resources {
 	struct device_node* root;
 };
 
-void early_parse_dtb_for_memory(void);
+void dtb_find_memory(uintptr_t dtb_entry);
 
-void parse_dtb(void);
-
-/* Defined in kernel/entry.S */
-extern uintptr_t dtb_entry;
+void dtb_parse(uintptr_t dtb_entry);
 
 #endif /* _LEN_DTB_H_ */

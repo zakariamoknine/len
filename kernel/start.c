@@ -14,9 +14,9 @@ void kernel_start(uint64_t hid, phys_addr_t dtb_entry,
 
 	sbi_init();
 
-	early_parse_dtb_for_memory();
+	dtb_find_memory((uintptr_t)dtb_entry);
 
-	parse_dtb();
+	dtb_parse((uintptr_t)dtb_entry);
 
 	while (true);
 }

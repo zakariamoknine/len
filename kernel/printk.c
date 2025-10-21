@@ -94,15 +94,13 @@ static void vprintk(const char* str, va_list ap)
 			pnumber(val, 16, 0);
 			break;
 		}
-		case '%': {
+		case '%':
 			pchar('%');
 			break;
-		}
-		default: {
+		default:
 			pchar('%');
 			pchar(*c);
 			break;
-		}
 		}
 	}
 
@@ -137,7 +135,6 @@ void log(int level, const char* str, ...)
 	va_list ap;
 	va_start(ap, str);
 	vprintk(str, ap);
-	va_end(ap);
 	va_end(ap);
 
 	printk("\n");
