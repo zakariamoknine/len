@@ -119,17 +119,16 @@ void log(int level, const char* str, ...)
 {
 	switch (level) {
 	case LOG_INFO:
-		printk("[ OK ]: ");
+		printk("[    OK    ]: ");
 		break;
 	case LOG_WARNING:
-		printk("[ WARNING ]: ");
+		printk("[  WARNING  ]: ");
 		break;
 	case LOG_ERROR:
-		printk("[ ERROR ]: ");
+		printk("[   ERROR   ]: ");
 		break;
 	default:
-		printk("[ LEN ]:");
-		break;
+		return;
 	}
 
 	va_list ap;

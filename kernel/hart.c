@@ -13,36 +13,36 @@ void hart_init(struct hart* ht, uint64_t id, uint64_t hid)
 	w_tp((uint64_t)ht);
 }
 
-int interrupts_state(void)
+int irq_state(void)
 {
 	uint64_t state = r_sstatus();
 	return ((state & SSTATUS_SIE) == 0) ? 0 : 1;
 }
 
-void interrupts_enable(void)
+void irq_enable(void)
 {
 	struct hart* this_hart = hartid();
 
-	this_hart->interrupts_disable_nesting--;
+	this_hart->irq_disable_nesting--;
 
-	if ((this_hart->interrupts_disable_nesting == 0) 
-			&& this_hart->interrupts_enabled) {
+	if ((this_hart->irq_disable_nesting == 0) 
+			&& this_hart->irq_enabled) {
 		/* enable interrupts */
 		w_sstatus(r_sstatus() | SSTATUS_SIE);
 	}
 }
 
-void interrupts_disable(void)
+void irq_disable(void)
 {
-	int state = interrupts_state();
+	int state = irq_state();
 	struct hart* this_hart = hartid();
 
 	/* disable interrupts */
 	w_sstatus(r_sstatus() & ~SSTATUS_SIE);
 
-	if (this_hart->interrupts_disable_nesting == 0) {
-		this_hart->interrupts_enabled = state;
+	if (this_hart->irq_disable_nesting == 0) {
+		this_hart->irq_enabled = state;
 	}
 
-	this_hart->interrupts_disable_nesting++;
+	this_hart->irq_disable_nesting++;
 }

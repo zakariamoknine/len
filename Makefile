@@ -35,15 +35,17 @@ qemugdb:
 
 CSCOPEDIR := $(SRCDIRS) include
 
-tags: cscope
+tags: cscope 
 	$(CTAGS) -L cscope.files
 
 cscope:
 	find $(CSCOPEDIR) -type f -name *.[chSs] > cscope.files
 	$(CSCOPE) -q -R -k -b -i cscope.files
 
+clean-tags:
+	rm -rf tags cscope.*
+
 clean:
 	rm -rf $(OUTDIR)
-	rm -rf tags cscope.*
 
 .PHONY: all qemu qemugdb tags cscope clean

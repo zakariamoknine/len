@@ -3,7 +3,7 @@
 
 void spinlock_acquire(struct spinlock* lock)
 {
-	interrupts_disable();
+	irq_disable();
 
 	while (__sync_lock_test_and_set(&lock->locked, 1));
 
@@ -16,5 +16,5 @@ void spinlock_release(struct spinlock* lock)
 
 	__sync_lock_release(&lock->locked);
 
-	interrupts_enable();
+	irq_enable();
 }

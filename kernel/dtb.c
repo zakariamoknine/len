@@ -3,9 +3,7 @@
 
 #include <len/libfdt.h>
 
-/*
- * let 1 be the default
- */
+/* let 1 be the default */
 static uint32_t dt_root_addr_cells = 1;
 static uint32_t dt_root_size_cells = 1;
 
@@ -127,6 +125,7 @@ void dtb_find_memory(uintptr_t dtb_entry)
 
 			mmrgn.base = base;
 			mmrgn.size = size;
+
 			mm_insert_region(mmrgn);
 		}
 	}
