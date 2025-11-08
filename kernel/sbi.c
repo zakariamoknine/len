@@ -1,4 +1,4 @@
-#include <len/internal.h>
+#include <len/kernel.h>
 #include <len/sbi.h>
 
 static int sbi_legacy = false;
@@ -50,6 +50,12 @@ void sbi_init(void)
 
 	if (sbi_spec.error != 0) {
 		sbi_legacy = true;
+
+		/* 
+		 * TODO: are legacy extension all available in legacy
+		 *  mode? if yes, then assign them here to true
+	      	 */
+
 		return;
 	}
 

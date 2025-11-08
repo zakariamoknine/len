@@ -1,4 +1,4 @@
-#include <len/internal.h>
+#include <len/kernel.h>
 #include <len/mm.h>
 
 void mm_insert_region(struct mm_region region)

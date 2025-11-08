@@ -1,2 +1,2 @@
-#include <len/internal.h>
+#include <len/kernel.h>
 #include <len/bit.h>

@@ -1,4 +1,4 @@
-#include <len/internal.h>
+#include <len/kernel.h>
 #include <len/printk.h>
 #include <len/sbi.h>
 
@@ -119,16 +119,17 @@ void log(int level, const char* str, ...)
 {
 	switch (level) {
 	case LOG_INFO:
-		printk("[    OK    ]: ");
+		printk("[  OK  ] ");
 		break;
 	case LOG_WARNING:
-		printk("[  WARNING  ]: ");
+		printk("[  WARNING  ] ");
 		break;
 	case LOG_ERROR:
-		printk("[   ERROR   ]: ");
+		printk("[  ERROR  ] ");
 		break;
 	default:
-		return;
+		printk("[  LOG  ] ");
+		break;
 	}
 
 	va_list ap;
@@ -141,7 +142,7 @@ void log(int level, const char* str, ...)
 
 void panic(const char* str, ...)
 {
-	printk("[ PANIC ]: ");
+	printk("[  PANIC  ] ");
 
 	va_list ap;
 	va_start(ap, str);

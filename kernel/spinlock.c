@@ -1,4 +1,4 @@
-#include <len/internal.h>
+#include <len/kernel.h>
 #include <len/spinlock.h>
 
 void spinlock_acquire(struct spinlock* lock)

@@ -1,5 +1,6 @@
-#include <len/internal.h>
+#include <len/kernel.h>
 #include <len/hart.h>
+#include <len/csr.h>
 
 struct hart harts[HART_MAX_NUM] = { 0 };
 

@@ -1,4 +1,4 @@
-#include <len/internal.h>
+#include <len/kernel.h>
 #include <len/dtb.h>
 
 #include <len/libfdt.h>

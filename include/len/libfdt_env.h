@@ -1,7 +1,7 @@
 #ifndef LIBFDT_ENV_H
 #define LIBFDT_ENV_H
 
-#include <len/internal.h>
+#include <len/kernel.h>
 
 typedef be16 fdt16_t;
 typedef be32 fdt32_t;

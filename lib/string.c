@@ -1,4 +1,4 @@
-#include <len/internal.h>
+#include <len/kernel.h>
 #include <len/string.h>
 
 int strcmp(const char* str1, const char* str2)
@@ -15,7 +15,7 @@ int strncmp(const char* str1, const char* str2, size_t n)
 	for (size_t i = 0; i < n; i++) {
 		if (str1[i] != str2[i] || str1[i] == '\0')
 			return (unsigned char)str1[i] -
-			       	(unsigned char)str2[i];
+			       (unsigned char)str2[i];
 	}
 	return 0;
 }
@@ -49,11 +49,9 @@ char* strrchr(const char* str, int c)
 		}
 		str++;
 	}
-
 	if (ch == '\0') {
 		return (char*)str;
 	}
-
 	return (char*)last;
 }
 
@@ -104,7 +102,6 @@ void* memmove(void* dest, const void* src, size_t n)
 {
 	uint8_t* d = (uint8_t*)dest;
 	const uint8_t* s = (const uint8_t*)src;
-
 	if (d < s) {
 		for (size_t i = 0; i < n; i++) {
 			d[i] = s[i];

@@ -1,7 +1,7 @@
 #ifndef _LEN_FILE_H_
 #define _LEN_FILE_H_
 
-#include <len/internal.h>
+#include <len/kernel.h>
 #include <len/fs.h>
 
 enum file_types {

@@ -15,7 +15,7 @@ $(KERNEL): $(ELF)
 	$(OBJCOPY) -O binary $< $@
 
 $(ELF): $(OBJ)
-	$(LD) -T kernel.ld -o $@ $^
+	$(LD) -T linker.ld -o $@ $^
 
 $(OUTDIR)/%.o: %.c
 	@mkdir -p $(dir $@)

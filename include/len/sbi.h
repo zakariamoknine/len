@@ -61,18 +61,24 @@
 #define SBI_REMOTE_SFENCE_VMA_ASID       7
 #define SBI_SHUTDOWN		         8
 
-#define SBI_CALL0(e, f)			    SBI_CALL5(e, f, 0,  \
-						0, 0, 0, 0)
-#define SBI_CALL1(e, f, a1)		    SBI_CALL5(e, f, a1, \
-						0, 0, 0, 0)
-#define SBI_CALL2(e, f, a1, a2)		    SBI_CALL5(e, f, a1, \
-						a2, 0, 0, 0)
-#define SBI_CALL3(e, f, a1, a2, a3)	    SBI_CALL5(e, f, a1, \
-						a2, a3, 0, 0)
-#define SBI_CALL4(e, f, a1, a2, a3, a4)	    SBI_CALL5(e, f, a1, \
-						a2, a3, a4, 0)
-#define SBI_CALL5(e, f, a1, a2, a3, a4, a5) sbi_call(e, f, a1,  \
-						a2, a3, a4, a5)
+#define SBI_CALL0(e, f)	\
+	SBI_CALL5(e, f, 0, 0, 0, 0, 0)
+
+#define SBI_CALL1(e, f, a1) \
+	SBI_CALL5(e, f, a1, 0, 0, 0, 0)
+
+#define SBI_CALL2(e, f, a1, a2) \
+	SBI_CALL5(e, f, a1, a2, 0, 0, 0)
+
+#define SBI_CALL3(e, f, a1, a2, a3) \
+	SBI_CALL5(e, f, a1, a2, a3, 0, 0)
+
+#define SBI_CALL4(e, f, a1, a2, a3, a4) \
+	SBI_CALL5(e, f, a1, a2, a3, a4, 0)
+
+#define SBI_CALL5(e, f, a1, a2, a3, a4, a5) \
+	sbi_call(e, f, a1, a2, a3, a4, a5)
+
 struct sbi_ret {
 	long error;
 	long value;

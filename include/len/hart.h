@@ -1,8 +1,10 @@
 #ifndef _LEN_HART_H_
 #define _LEN_HART_H_
 
-#include <len/config.h>
 #include <len/defs.h>
+#include <len/csr.h>
+
+#define HART_MAX_NUM  16
 
 struct hart {
 	uint64_t id;  /* logical ID */

@@ -1,4 +1,5 @@
-#include <len/internal.h>
+#include <len/kernel.h>
+#include <len/sbi.h>
 #include <len/hart.h>
 #include <len/dtb.h>
 #include <len/mm.h>

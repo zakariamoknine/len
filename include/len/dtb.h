@@ -1,7 +1,7 @@
 #ifndef _LEN_DTB_H_
 #define _LEN_DTB_H_
 
-#include <len/internal.h>
+#include <len/kernel.h>
 #include <len/mm.h>
 #include <len/file.h>
 

@@ -1,4 +1,3 @@
-#include <len/config.h>
 #include <len/mm_param.h>
 
 .section .text.boot

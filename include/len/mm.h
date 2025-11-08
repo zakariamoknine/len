@@ -1,7 +1,9 @@
 #ifndef _LEN_MM_H_
 #define _LEN_MM_H_
 
-#include <len/internal.h>
+#include <len/kernel.h>
+
+#define MEMORY_REGIONS_MAX_NUM  10
 
 struct mm_region {
 	phys_addr_t base;
