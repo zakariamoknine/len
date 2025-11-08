@@ -53,7 +53,7 @@ void sbi_init(void)
 
 		/* 
 		 * TODO: are legacy extension all available in legacy
-		 *  mode? if yes, then assign them here to true
+		 * mode? if yes, then assign them here to true
 	      	 */
 
 		return;
