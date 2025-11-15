@@ -1,13 +1,13 @@
 include Makefile.conf
 
-OUTDIR := out
-ELF := $(OUTDIR)/kernel.elf
-KERNEL := $(OUTDIR)/image
+BUILD_DIR := build
+ELF := $(BUILD_DIR)/kernel.elf
+KERNEL := $(BUILD_DIR)/image
 
 SRCDIRS := kernel drivers mm fs lib fdt
 
 SRC := $(shell find $(SRCDIRS) -type f \( -name "*.c" -o -name "*.S" \))
-OBJ := $(patsubst %.c, $(OUTDIR)/%.o, $(filter %.c,$(SRC))) $(patsubst %.S, $(OUTDIR)/%.o, $(filter %.S,$(SRC)))
+OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(filter %.c,$(SRC))) $(patsubst %.S, $(BUILD_DIR)/%.o, $(filter %.S,$(SRC)))
 
 all: $(KERNEL)
 
@@ -17,11 +17,11 @@ $(KERNEL): $(ELF)
 $(ELF): $(OBJ)
 	$(LD) -T linker.ld -o $@ $^
 
-$(OUTDIR)/%.o: %.c
+$(BUILD_DIR)/%.o: %.c
 	@mkdir -p $(dir $@)
 	$(CC) $(CCFLAGS) -o $@ $<
 
-$(OUTDIR)/%.o: %.S
+$(BUILD_DIR)/%.o: %.S
 	@mkdir -p $(dir $@)
 	$(CC) $(CCFLAGS) -o $@ $<
 
@@ -46,6 +46,6 @@ clean-tags:
 	rm -rf tags cscope.*
 
 clean:
-	rm -rf $(OUTDIR)
+	rm -rf $(BUILD_DIR)
 
 .PHONY: all qemu qemugdb tags cscope clean
