@@ -1,8 +1,9 @@
 include Makefile.conf
 
 BUILD_DIR := build
-ELF := $(BUILD_DIR)/kernel.elf
-KERNEL := $(BUILD_DIR)/image
+
+ELF    := $(BUILD_DIR)/kernel.elf
+KERNEL := $(BUILD_DIR)/kernel.bin
 
 SRCDIRS := kernel drivers mm fs lib fdt
 
