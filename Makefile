@@ -1,9 +1,7 @@
 include Makefile.conf
 
-READLINK := readlink
-
 ifdef O
-	BUILD_DIR=$(O)
+	BUILD_DIR=$(shell readlink -m $(O))
 else
 	BUILD_DIR=$(CURDIR)/build
 endif
