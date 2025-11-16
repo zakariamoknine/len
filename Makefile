@@ -1,13 +1,19 @@
 include Makefile.conf
 
-BUILD_DIR := build
+READLINK := readlink
+
+ifdef O
+	BUILD_DIR=$(O)
+else
+	BUILD_DIR=$(CURDIR)/build
+endif
 
 ELF    := $(BUILD_DIR)/kernel.elf
 KERNEL := $(BUILD_DIR)/kernel.bin
 
 SRCDIRS := kernel drivers mm fs lib fdt
 
-SRC := $(shell find $(SRCDIRS) -type f \( -name "*.c" -o -name "*.S" \))
+SRC := $(wildcard $(addsuffix /*.c,$(SRCDIRS))) $(wildcard $(addsuffix /*.S,$(SRCDIRS)))
 OBJ := $(patsubst %.c, $(BUILD_DIR)/%.o, $(filter %.c,$(SRC))) $(patsubst %.S, $(BUILD_DIR)/%.o, $(filter %.S,$(SRC)))
 
 all: $(KERNEL)
