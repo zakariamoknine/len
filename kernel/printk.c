@@ -115,22 +115,28 @@ void printk(const char* str, ...)
 	va_end(ap);
 }
 
+#define LOG_BUFFER_MAX_LENGTH 256
+
 void log(int level, const char* str, ...)
 {
+	const char* tag;
+
 	switch (level) {
 	case LOG_INFO:
-		printk("[  OK  ] ");
+		tag = "[  OK  ] ";
 		break;
 	case LOG_WARNING:
-		printk("[  WARNING  ] ");
+		tag = "[  WARNING  ] ";
 		break;
 	case LOG_ERROR:
-		printk("[  ERROR  ] ");
+		tag = "[  ERROR  ] ";
 		break;
 	default:
-		printk("[  LOG  ] ");
+		tag = "[  LOG  ] ";
 		break;
 	}
+
+	printk(tag);
 
 	va_list ap;
 	va_start(ap, str);
