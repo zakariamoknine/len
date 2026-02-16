@@ -1,0 +1,24 @@
+[build]
+target = "riscv64imac-unknown-none-elf"
+rustflags = [
+	"-Cstrip=debuginfo",
+	"-Cpanic=abort",
+	"-Copt-level=2",
+	"-Clto=n",
+	"-Ccodegen-units=1",
+	"-Crelocation-model=static",
+	"-Cforce-frame-pointers=y",
+	"-Cforce-unwind-tables=n",
+	"-Csymbol-mangling-version=v0",
+]
+
+[target.riscv64imac-unknown-none-elf]
+runner = "scripts/qemu_runner.sh"
+rustflags = [
+	"-Ctarget-cpu=generic-rv64",
+	"-Ccode-model=medium",
+	"-Cno-redzone",
+]
+
+[target.aarch64-unknown-none]
+runner = "scripts/qemu_runner.sh"
