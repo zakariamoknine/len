@@ -1,7 +1,6 @@
 use std::path::PathBuf;
 
-fn main()
-{
+fn main() {
     let target_arch = std::env::var("CARGO_CFG_TARGET_ARCH")
         .expect("CARGO_CFG_TARGET_ARCH is undefined.");
     
