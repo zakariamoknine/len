@@ -2,12 +2,12 @@
 members = ["usertest"]
 
 [package]
-name = "rive"
+name = "len"
 version = "0.1.0"
 edition = "2024"
 
 [[bin]]
-name = "rive"
+name = "len"
 path = "kernel/main.rs"
 
 [dependencies]

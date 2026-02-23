@@ -1,2 +1,2 @@
-# rive
-Rive is a minimal, multi-core UNIX-like kernel written in Rust
+# len
+len is a minimal, multi-core UNIX-like kernel written in Rust
