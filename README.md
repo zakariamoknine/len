@@ -1,13 +1,13 @@
 # len
 
 > [!WARNING]
-> len is under developement and is not yet stable.
+> len is under development and is not yet stable.
 
-len is an minimal, monolithic, multi-core UNIX-like kernel written in Rust.
+len is a minimal, monolithic, multi-core UNIX-like kernel written in Rust.
 
 # Features
 
-Several crucial features are implemented to ensure proper operation of the kernel
+Several crucial features are implemented to ensure proper operation of the kernel.
 
  * **POSIX system calls**
     * Device I/O: `open()`, `read()`, `write()`, `ioctl()`, `close()`
@@ -15,22 +15,22 @@ Several crucial features are implemented to ensure proper operation of the kerne
     * Memory Management: `mmap()`, `munmap()`, `sbrk()`
     * Filesystem Management: `chmod()`, `mkdir()`, `rmdir()`, `chdir()`
  * **Modular Memory Management**
-    * Bmalloc: Used for early boot allocations and memory revervations, 
-    * FrameAllocator: Implements a buddy allocator system, used to request frames and map them accordingly 
+    * Bmalloc: Used for early boot allocations and memory reservations. 
+    * FrameAllocator: Implements a buddy allocator system. It's used to request frames and map them accordingly 
     * #[global_allocator] configuration, making Rust's Core library heap-allocated types available in the kernel
  * **Modular Device Drivers**
-    * TTY subsystem that's different than the standard linux tty, no line control, just a simple ringbuffer
+    * TTY subsystem that's different from the standard linux tty, no line control, just a simple ringbuffer
     * Basic PS/2 serial driver
     * FAT32 filesystem driver
-    * `tmpfs` In-memory filesystem driver for temporary storage
+    * `tmpfs` in-memory filesystem driver for temporary storage
 
 # Building
 
 ### Build
 
-Make sure Rust is installed, follow the official installation guide available [here](https://rust-lang.org/tools/install/).
+Make sure Rust is installed. Follow the official installation guide available [here](https://rust-lang.org/tools/install/).
 
-You'll need to also install the Rust's riscv64imac toolchain, which will be installed by default after running the following command, this will also build the kernel.
+You'll need to also install Rust's `riscv64imac` toolchain, which will be installed by default after running the following command, this will also build the kernel.
 
 ```bash
 $ cargo build --release --target riscv64imac-unknown-none-elf
