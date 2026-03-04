@@ -30,7 +30,7 @@ Several crucial features are implemented to ensure proper operation of the kerne
 
 First, make sure Rust is installed, checkout [this page](https://rust-lang.org/tools/install/) for intruction on how to install Rust.
 
-You'll need to also install the Rust's riscv64imac toolchain, which will be installed by default after running
+You'll need to also install the Rust's riscv64imac toolchain, which will be installed by default after running the following command, this will also build the kernel.
 
 ```bash
 $ cargo build --release --target riscv64imac-unknown-none-elf
@@ -44,7 +44,7 @@ You'll need QEMU installed with support for riscv64 emulation
 $ sudo apt install qemu-system-riscv64
 ```
 
-You can start QEMU with
+You can run QEMU with
 
 ```bash
 $ cargo run --target riscv64imac-unknown-none-elf
