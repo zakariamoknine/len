@@ -15,12 +15,17 @@ Several crucial features are implemented to ensure proper operation of the kerne
     * Memory Management: `mmap()`, `munmap()`, `sbrk()`
     * Filesystem Management: `chmod()`, `mkdir()`, `rmdir()`, `chdir()`
  * **Modular Memory Management**
-    * Bmalloc: used for early allocations and memory revervations, 
+    * Bmalloc: Used for early boot allocations and memory revervations, 
+    * FrameAllocator: Implements a buddy allocator system, used to request frames and map them accordingly 
+    * #[global_allocator] configuration, making Rust's Core library heap-allocated types available in the kernel
  * **Modular Device Drivers**
+    * TTY: The tty subsystem is different than the standard linux tty, no line control, just a simple ringbuffer
+    * Basic PS/2 serial driver
+    * FAT32 filesystem driver
+    * `tmpfs` In-memory filesystem driver for temporary storage
 
 # Building
 
 # QEMU
 
 # Contributing
-
