@@ -15,6 +15,15 @@ source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "361a90feb7004eca4019fb28352a9465666b24f840f5c3cddf0ff13920590b89"
 
 [[package]]
+name = "len"
+version = "0.1.0"
+dependencies = [
+ "riscv",
+ "sbi-rt",
+ "thiserror",
+]
+
+[[package]]
 name = "paste"
 version = "1.0.15"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -67,15 +76,6 @@ name = "riscv-types"
 version = "0.1.0"
 source = "registry+https://github.com/rust-lang/crates.io-index"
 checksum = "d3f2ad9f15a07f4a0e1677124f9120ce7e83ab7e1ca7186af0ca9da529b62e80"
-
-[[package]]
-name = "rtk"
-version = "0.1.0"
-dependencies = [
- "riscv",
- "sbi-rt",
- "thiserror",
-]
 
 [[package]]
 name = "sbi-rt"
