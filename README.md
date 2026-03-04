@@ -26,6 +26,26 @@ Several crucial features are implemented to ensure proper operation of the kerne
 
 # Building
 
-# QEMU
+### Build
+
+You'll need to install the Rust's riscv64imac toolchain, which will be installed by default after running
+
+```bash
+$ cargo build --release --target riscv64imac-unknown-none-elf
+```
+
+### Emulation
+
+You'll need QEMU installed with support for riscv64 emulation
+
+```bash
+$ sudo apt install qemu-system-riscv64
+```
+
+You can start QEMU with
+
+```bash
+$ cargo run --target riscv64imac-unknown-none-elf
+```
 
 # Contributing
