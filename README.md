@@ -1,12 +1,13 @@
 # len
 
-**NOTE:** len is under developement and is not yet stable.
+> [!WARNING]
+> len is under developement and is not yet stable.
 
 len is an minimal, monolithic, multi-core UNIX-like kernel written in Rust.
 
 # Features
 
-Several crucial features are implemented to ensure proper operation of the kernel:
+Several crucial features are implemented to ensure proper operation of the kernel
 
  * **POSIX system calls**
     * Device I/O: `open()`, `read()`, `write()`, `ioctl()`, `close()`
