@@ -28,7 +28,7 @@ Several crucial features are implemented to ensure proper operation of the kerne
 
 ### Build
 
-First, make sure Rust is installed, checkout [this page](https://rust-lang.org/tools/install/) for intruction on how to install Rust.
+Make sure Rust is installed, follow the official installation guide available [here](https://rust-lang.org/tools/install/).
 
 You'll need to also install the Rust's riscv64imac toolchain, which will be installed by default after running the following command, this will also build the kernel.
 
@@ -52,4 +52,4 @@ $ cargo run --target riscv64imac-unknown-none-elf
 
 # Contributing
 
-We welcome contributions of all kinds! Whether you're fixing bugs, adding new features, improving documentation, or suggesting design ideas, your help is appreciated.
+All contributions are welcome! Whether you're fixing bugs, adding new features, improving documentation, or suggesting design ideas, your help is very much appreciated.
