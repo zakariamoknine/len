@@ -9,7 +9,7 @@ len is a minimal, monolithic, multi-core UNIX-like kernel written in Rust.
 
 Several crucial features are implemented to ensure proper operation of the kernel.
 
- * **POSIX system calls**
+ * **UNIX System Calls**
     * Device I/O: `open()`, `read()`, `write()`, `ioctl()`, `close()`
     * Process Management: `fork()`, `execve()`, `clone()`, `kill()`
     * Memory Management: `mmap()`, `munmap()`, `sbrk()`
