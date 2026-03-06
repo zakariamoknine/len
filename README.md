@@ -15,7 +15,7 @@ Several crucial features are implemented to ensure proper operation of the kerne
     * Memory Management: `mmap()`, `munmap()`, `sbrk()`
     * Filesystem Management: `chmod()`, `mkdir()`, `rmdir()`, `chdir()`
  * **Modular Memory Management**
-    * Bmalloc: Used for early boot allocations and memory reservations. 
+    * Bmalloc: Used for early boot allocations and memory reservations 
     * FrameAllocator: Implements a buddy allocator system. It's used to request frames and map them accordingly 
     * #[global_allocator] configuration, making Rust's Core library heap-allocated types available in the kernel
  * **Modular Device Drivers**
