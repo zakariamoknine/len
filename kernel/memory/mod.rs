@@ -1,5 +1,6 @@
 pub mod address;
 pub mod region;
+pub mod page;
 pub mod bmalloc;
 
 pub const PAGE_SIZE: usize = 4096;
