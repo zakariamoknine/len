@@ -89,11 +89,7 @@ pub trait Arch: CpuOps + VirtualMemory {
 
     unsafe fn copy_to_user(src: *const (), dst: UA, len: usize) -> Result<()>;
 
-    unsafe fn copy_strn_from_user(
-        src: UA,
-        dst: *mut u8,
-        len: usize,
-    ) -> impl Future<Output = Result<usize>>;
+    unsafe fn copy_strn_from_user(src: UA, dst: *mut u8, len: usize) -> Result<usize>;
 }
 
 #[cfg(target_arch = "aarch64")]
