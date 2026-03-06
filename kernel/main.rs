@@ -3,6 +3,7 @@
 
 mod arch;
 mod memory;
+mod sync;
 
 mod error;
 mod panic;
