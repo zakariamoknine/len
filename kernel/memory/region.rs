@@ -26,6 +26,6 @@ impl<T: MemoryKind> MemoryRegion<T> {
     }
 }
 
-pub type PhysicalMemoryRegion = MemoryRegion<Physical>;
-pub type VirtualMemoryRegion = MemoryRegion<Virtual>;
+pub type PhysMemoryRegion = MemoryRegion<Physical>;
+pub type VirtMemoryRegion = MemoryRegion<Virtual>;
 pub type UserMemoryRegion = MemoryRegion<User>;
