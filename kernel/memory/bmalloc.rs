@@ -150,7 +150,7 @@ impl<T: AddressTranslator<()>> Bmalloc<T> {
 
             while mem_region.contains(candidate) {
                 while res_idx < self.res.count
-                    && self.res[res_idx].end_address().value() <= candidate.start_address().value()
+                    && self.res[res_idx].end_address().addr() <= candidate.start_address().addr()
                 {
                     res_idx += 1;
                 }
@@ -206,11 +206,11 @@ impl<T: AddressTranslator<()>> Bmalloc<T> {
 
             self.res.count -= 1;
 
-            let start_val = old.start_address().value();
-            let end_val = old.end_address().value();
+            let start_val = old.start_address().addr();
+            let end_val = old.end_address().addr();
 
-            let remove_start = region_to_remove.start_address().value();
-            let remove_end = region_to_remove.end_address().value();
+            let remove_start = region_to_remove.start_address().addr();
+            let remove_end = region_to_remove.end_address().addr();
 
             if remove_start > start_val {
                 let left =
@@ -225,7 +225,7 @@ impl<T: AddressTranslator<()>> Bmalloc<T> {
 
             Ok(())
         } else {
-            Err(KernelError::NoMemRegion)
+            Err(KernelError::NoMemory)
         }
     }
 
@@ -246,7 +246,7 @@ impl<T: AddressTranslator<()>> Bmalloc<T> {
 
         if let Some(addr) = self.find_allocation_location(new_size, align) {
             let va = addr.to_va::<T>();
-            let new_ptr: *mut PhysMemoryRegion = va.as_ptr_mut().cast();
+            let new_ptr: *mut PhysMemoryRegion = va.as_mut_ptr().cast();
 
             unsafe {
                 new_ptr.copy_from(list.regions, list.count);
