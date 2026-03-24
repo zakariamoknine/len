@@ -75,7 +75,8 @@ pub trait Arch: CpuOps + VirtualMemory {
 
     fn new_user_context(entry_point: VA, stack_top: VA) -> Self::UserContext;
 
-    fn context_switch(new: Arc<Task>);
+    // Will be available when Task is defined
+    //fn context_switch(new: Arc<Task>);
 
     fn power_off() -> !;
 
