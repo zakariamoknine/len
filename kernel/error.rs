@@ -36,6 +36,9 @@ pub enum KernelError {
     #[error("Invalid value")]
     InvalidValue,
 
+    #[error("In use")]
+    InUse,
+
     #[error("{0}")]
     Other(&'static str),
 }
