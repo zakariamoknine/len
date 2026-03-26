@@ -5,6 +5,7 @@ mod arch;
 mod memory;
 mod sync;
 mod drivers;
+mod fs;
 
 mod error;
 mod panic;
