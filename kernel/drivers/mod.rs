@@ -3,7 +3,6 @@ use crate::{
     sync::SpinLock,
 };
 use core::{
-    any::Any,
     sync::atomic::{AtomicU64, Ordering},
 };
 use alloc::{
@@ -20,15 +19,21 @@ pub enum ReservedMajors {
     Uart = 4,
 }
 
-pub trait Driver: Send + Sync + Any {
+pub trait Driver: {
     fn name(&self) -> &'static str;
 }
 
-pub trait OpenableDevice: Send + Sync {
+pub trait OpenableDevice: {
     //fn open(&self, args: OpenFlags) -> Result<Arc<OpenFile>>;
 }
 
-pub trait CharDriver: Send + Sync + 'static {
+#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Debug)]
+pub struct CharDevDescriptor {
+    pub major: u64,
+    pub minor: u64,
+}
+
+pub trait CharDriver: 'static {
     fn get_device(&self, minor: u64) -> Option<Arc<dyn OpenableDevice>>;
 }
 
