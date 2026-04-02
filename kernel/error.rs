@@ -26,9 +26,39 @@ pub enum PagingError {
 }
 
 #[derive(Error, Debug, PartialEq, Eq, Clone)]
+pub enum FsError {
+    #[error("The path or file was not found")]
+    NotFound,
+
+    #[error("The path component is not a directory.")]
+    NotADirectory,
+
+    #[error("The path component is a directory.")]
+    IsADirectory,
+
+    #[error("The file or directory already exists.")]
+    AlreadyExists,
+
+    #[error("The directory is not empty.")]
+    DirectoryNotEmpty,
+
+    #[error("The filesystem is corrupted or has an invalid format.")]
+    InvalidFs,
+
+    #[error("The operation is not permitted.")]
+    PermissionDenied,
+
+    #[error("Too many open files")]
+    TooManyFiles,
+}
+
+#[derive(Error, Debug, PartialEq, Eq, Clone)]
 pub enum KernelError {
     #[error("Page table mapping failed: {0}")]
     PagingError(#[from] PagingError),
+
+    #[error("Filesystem operation failed: {0}")]
+    FsError(#[from] FsError),
 
     #[error("Cannot allocate memory")]
     NoMemory,
